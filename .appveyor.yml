@@ -1,0 +1,18 @@
+version: "{build}"
+clone_folder: C:\gopath\src\github.com\smola\ci-tricks
+environment:
+  GOPATH: C:\gopath
+  matrix:
+    - POSTGRESQL_VERSION: 9.5
+    - POSTGRESQL_VERSION: 9.6
+    - POSTGRESQL_VERSION: 10
+image: Visual Studio 2017
+platform:
+  - x64
+matrix:
+  fast_finish: true
+build: off
+test_script:
+  - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%
+  - go test -v ./...
+deploy: off
