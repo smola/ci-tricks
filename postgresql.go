@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
+	"strings"
 )
 
 func init() {
@@ -76,12 +78,13 @@ func installPostgresTravisLinux(env *Env, version string) error {
 }
 
 func installPostgresTravisOSX(env *Env, version string) error {
-	const defaultVersion = "9.6"
 	if err := Run("rm", "-rf", "/usr/local/var/postgres"); err != nil {
 		return err
 	}
 
-	if version != defaultVersion {
+	if hasPsqlVersion(version) {
+		fmt.Printf("PostgreSQL %s already installed\n", version)
+	} else {
 		pkg := fmt.Sprintf("postgresql@%s", version)
 
 		if err := Run("brew", "unlink", "postgresql"); err != nil {
@@ -120,4 +123,24 @@ func installPostgresTravisOSX(env *Env, version string) error {
 	}
 
 	return nil
+}
+
+func hasPsqlVersion(version string) bool {
+	actualVersion := psqlVersion()
+	if actualVersion == "" {
+		return false
+	}
+
+	actualVersion = strings.Replace(actualVersion, "psql (PostgreSQL) ", "", 1)
+	return strings.HasPrefix(actualVersion, version+".")
+}
+
+func psqlVersion() string {
+	cmd := exec.Command("psql", "--version")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return ""
+	}
+
+	return strings.TrimSpace(string(out))
 }
