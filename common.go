@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"net"
 	"os"
 	"os/exec"
 	"runtime"
@@ -73,14 +74,34 @@ func GetProvider() (string, error) {
 }
 
 func Run(cmd string, args ...string) error {
+	return RunWithEnv(os.Environ(), cmd, args...)
+}
+
+func RunWithEnv(env []string, cmd string, args ...string) error {
 	fmt.Println("Run:", cmd, strings.Join(args, " "))
-	c := exec.CommandContext(GetTimeoutContext(DefaultTimeout), cmd, args...)
+	ctx, cancel := GetTimeoutContext(DefaultTimeout)
+	defer cancel()
+	c := exec.CommandContext(ctx, cmd, args...)
 	c.Stderr = os.Stderr
 	c.Stdout = os.Stdout
+	c.Env = env
 	return c.Run()
 }
 
-func GetTimeoutContext(d time.Duration) context.Context {
-	ctx, _ := context.WithTimeout(context.Background(), d)
-	return ctx
+func GetTimeoutContext(d time.Duration) (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), d)
+}
+
+func WaitForTCP(addr string) error {
+	for i := 0; i < 30; i++ {
+		conn, err := net.Dial("tcp", addr)
+		if err == nil {
+			_ = conn.Close()
+			return nil
+		}
+
+		time.Sleep(500 * time.Millisecond)
+	}
+
+	return fmt.Errorf("could not connect to: %s", addr)
 }

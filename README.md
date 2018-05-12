@@ -30,6 +30,14 @@ PostgreSQL can be set up by setting the `POSTGRESQL_VERSION` environment variabl
 | `9.6`         | ✅             | ✅           | ✅                     |
 | `10`          | ❌             | ✅           | ✅                     |
 
+### RabbitMQ
+
+RabbitMQ can be set up by setting the `RABBITMQ_VERSION` environment variable to the desired PostgreSQL version.
+
+| Version       | Travis/Linux  | Travis/macOS | Appveyor/Windows      |
+| ------------- |:-------------:|:------------:|:---------------------:|
+| `any`         | ✅             | ✅           | ❌                     |
+
 ## Contributing
 
 [Issues](https://github.com/smola/ci-tricks/issues) and [pull requests](https://github.com/smola/ci-tricks/pulls) are welcome.

@@ -6,6 +6,7 @@ environment:
     - POSTGRESQL_VERSION: 9.5
     - POSTGRESQL_VERSION: 9.6
     - POSTGRESQL_VERSION: 10
+    - RABBITMQ_VERSION: any
 image: Visual Studio 2017
 platform:
   - x64

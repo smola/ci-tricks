@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 )
 
 func init() {
@@ -28,6 +27,10 @@ func InstallPostgres(env *Env) error {
 		err = installPostgresTravis(env, version)
 	default:
 		err = fmt.Errorf("unsupported provider: %s", env.Provider)
+	}
+
+	if err == nil {
+		err = WaitForTCP("127.0.0.1:5432")
 	}
 
 	if err != nil {
@@ -104,7 +107,9 @@ func installPostgresTravisOSX(env *Env, version string) error {
 		return err
 	}
 
-	time.Sleep(1 * time.Second)
+	if err := WaitForTCP("127.0.0.1:5432"); err != nil {
+		return err
+	}
 
 	if err := Run("createuser", "-s", "-p", "5432", "postgres"); err != nil {
 		return err

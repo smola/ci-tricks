@@ -5,6 +5,8 @@ os:
   - linux
   - osx
 env:
+  global:
+    - CGO_ENABLED: 0
   matrix:
     - POSTGRESQL_VERSION=9.2
     - POSTGRESQL_VERSION=9.3
@@ -12,6 +14,7 @@ env:
     - POSTGRESQL_VERSION=9.5
     - POSTGRESQL_VERSION=9.6
     - POSTGRESQL_VERSION=10
+    - RABBITMQ_VERSION=any
 matrix:
   fast_finish: true
   exclude:
