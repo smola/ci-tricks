@@ -1,18 +1,22 @@
 language: go
+go: 1.9.x
 env:
   global:
     - CGO_ENABLED: 0
 matrix:
   fast_finish: true
-  # osx_image does not expand build matrix, so we have to build it manually here
-  # https://github.com/travis-ci/travis-ci/issues/7587
+install:
+  - echo pass
+script:
+  - go test -v ./...
+jobs:
   include:
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.2'}
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.3'}
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.4'}
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.5'}
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
-    - {os: linux, dist: trusty, sudo: required, env: 'PRABBITMQ_VERSION=any'}
+    - {os: linux, dist: trusty, sudo: required, env: 'RABBITMQ_VERSION=any'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.4'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.5'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.6'}
@@ -23,3 +27,19 @@ matrix:
     - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=9.6'}
     - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=10'}
     - {os: osx, osx_image: xcode9.3,            env: 'RABBITMQ_VERSION=any'}
+    - stage: deploy
+      os: linux
+      sudo: false
+      dist: trusty
+      if: tag IS present
+      script:
+        - go get github.com/mitchellh/gox
+        - gox -osarch="linux/amd64 darwin/amd64 windows/amd64" -ldflags="-s -w"
+      deploy:
+        provider: releases
+        api_key: $GITHUB_TOKEN
+        skip_cleanup: true
+        file_glob: true
+        file: ci-tricks_*
+        on:
+          tags: true

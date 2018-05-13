@@ -36,7 +36,7 @@ RabbitMQ can be set up by setting the `RABBITMQ_VERSION` environment variable to
 
 | Version       | Travis/Linux  | Travis/macOS | Appveyor/Windows      |
 | ------------- |:-------------:|:------------:|:---------------------:|
-| `any`         | ✅             | ✅           | ❌                     |
+| `any`         | ✅             | ✅           | ✅                     |
 
 ## Contributing
 
