@@ -1,26 +1,25 @@
 language: go
-sudo: required
-dist: trusty
-os:
-  - linux
-  - osx
 env:
   global:
     - CGO_ENABLED: 0
-  matrix:
-    - POSTGRESQL_VERSION=9.2
-    - POSTGRESQL_VERSION=9.3
-    - POSTGRESQL_VERSION=9.4
-    - POSTGRESQL_VERSION=9.5
-    - POSTGRESQL_VERSION=9.6
-    - POSTGRESQL_VERSION=10
-    - RABBITMQ_VERSION=any
 matrix:
   fast_finish: true
-  exclude:
-    - os: linux
-      env: POSTGRESQL_VERSION=10
-    - os: osx
-      env: POSTGRESQL_VERSION=9.2
-    - os: osx
-      env: POSTGRESQL_VERSION=9.3
+  # osx_image does not expand build matrix, so we have to build it manually here
+  # https://github.com/travis-ci/travis-ci/issues/7587
+  include:
+    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.2'}
+    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.3'}
+    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.4'}
+    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.5'}
+    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
+    - {os: linux, dist: trusty, sudo: required, env: 'PRABBITMQ_VERSION=any'}
+    - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.4'}
+    - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.5'}
+    - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.6'}
+    - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=10'}
+    - {os: osx, osx_image: xcode8.3,            env: 'RABBITMQ_VERSION=any'}
+    - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=9.4'}
+    - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=9.5'}
+    - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=9.6'}
+    - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=10'}
+    - {os: osx, osx_image: xcode9.3,            env: 'RABBITMQ_VERSION=any'}

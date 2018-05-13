@@ -87,6 +87,18 @@ func installRabbitTravisLinux(env *Env, version string) error {
 }
 
 func installRabbitTravisOSX(env *Env, version string) error {
+	// High Sierra does not come with /usr/local/sbin by default,
+	// which makes linking some Homebrew packages fail.
+	if err := Run("sudo", "mkdir", "-p", "/usr/local/sbin"); err != nil {
+		return err
+	}
+
+	if err := Run("sudo", "chown", "-R",
+		fmt.Sprintf("%s:admin", env.User.Username),
+		"/usr/local/sbin"); err != nil {
+		return err
+	}
+
 	if err := Run("brew", "install", "rabbitmq"); err != nil {
 		return err
 	}

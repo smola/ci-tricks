@@ -6,6 +6,7 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"os/user"
 	"runtime"
 	"strings"
 	"time"
@@ -17,6 +18,7 @@ type Env struct {
 	Provider string
 	OS       string
 	Arch     string
+	User     *user.User
 }
 
 const (
@@ -54,10 +56,16 @@ func GetEnv() (*Env, error) {
 		return nil, err
 	}
 
+	u, err := user.Current()
+	if err != nil {
+		return nil, fmt.Errorf("cannot get current user: %s", err)
+	}
+
 	return &Env{
 		Provider: p,
 		OS:       runtime.GOOS,
 		Arch:     runtime.GOARCH,
+		User:     u,
 	}, nil
 }
 
