@@ -15,6 +15,20 @@
 1. Set the environment variables as required by each trick.
 2. Run `ci-tricks`.
 
+On Travis CI you can run latest `ci-tricks` version with:
+
+```yaml
+install:
+  - wget -qO - https://raw.githubusercontent.com/smola/ci-tricks/master/get.sh | bash
+```
+
+On Appveyor you can use:
+
+```yaml
+install:
+  - ps: iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smola/ci-tricks/master/get.ps1'))
+```
+
 ## Tricks
 
 ### PostgreSQL
