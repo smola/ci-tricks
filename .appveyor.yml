@@ -2,6 +2,7 @@ version: "{build}"
 clone_folder: C:\gopath\src\github.com\smola\ci-tricks
 environment:
   GOPATH: C:\gopath
+  TEST_LIVE: 1
   matrix:
     - POSTGRESQL_VERSION: 9.5
     - POSTGRESQL_VERSION: 9.6
@@ -12,6 +13,8 @@ platform:
   - x64
 matrix:
   fast_finish: true
+install:
+  - ps: iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smola/ci-tricks/example/get.ps1'))
 build: off
 test_script:
   - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%

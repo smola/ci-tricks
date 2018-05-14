@@ -2,11 +2,11 @@ language: go
 go: 1.9.x
 env:
   global:
-    - CGO_ENABLED: 0
+    - TEST_LIVE: 1
 matrix:
   fast_finish: true
 install:
-  - echo pass
+  - wget -qO - https://raw.githubusercontent.com/smola/ci-tricks/example/get.sh | bash
 script:
   - go test -v ./...
 jobs:
@@ -27,19 +27,3 @@ jobs:
     - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=9.6'}
     - {os: osx, osx_image: xcode9.3,            env: 'POSTGRESQL_VERSION=10'}
     - {os: osx, osx_image: xcode9.3,            env: 'RABBITMQ_VERSION=any'}
-    - stage: deploy
-      os: linux
-      sudo: false
-      dist: trusty
-      if: tag IS present
-      script:
-        - go get github.com/mitchellh/gox
-        - gox -osarch="linux/amd64 darwin/amd64 windows/amd64" -ldflags="-s -w"
-      deploy:
-        provider: releases
-        api_key: $GITHUB_TOKEN
-        skip_cleanup: true
-        file_glob: true
-        file: ci-tricks_*
-        on:
-          tags: true
