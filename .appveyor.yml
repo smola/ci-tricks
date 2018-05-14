@@ -3,13 +3,17 @@ clone_folder: C:\gopath\src\github.com\smola\ci-tricks
 environment:
   GOPATH: C:\gopath
   matrix:
-    - POSTGRESQL_VERSION: 9.5
-    - POSTGRESQL_VERSION: 9.6
-    - POSTGRESQL_VERSION: 10
-    - RABBITMQ_VERSION: any
+    #- POSTGRESQL_VERSION: 9.5
+    #- POSTGRESQL_VERSION: 9.6
+    #- POSTGRESQL_VERSION: 10
+    #- RABBITMQ_VERSION: any
+    - PYTHON_VERSION: 2.6
+    - PYTHON_VERSION: 2.7
+    - PYTHON_VERSION: 3.6
 image: Visual Studio 2017
 platform:
   - x64
+  - x34
 matrix:
   fast_finish: true
 build: off
