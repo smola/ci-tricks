@@ -8,15 +8,18 @@ matrix:
 install:
   - echo pass
 script:
-  - go test -v ./...
+  #- go test -v ./...
+  - base=https://github.com/docker/machine/releases/download/v0.14.0 && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine
+  - docker-machine create -d virtualbox virtualbo
+  - docker-machine env virtualbox
 jobs:
   include:
-    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.2'}
-    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.3'}
-    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.4'}
-    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.5'}
-    - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
-    - {os: linux, dist: trusty, sudo: required, env: 'RABBITMQ_VERSION=any'}
+    #- {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.2'}
+    #- {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.3'}
+    #- {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.4'}
+    #- {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.5'}
+    #- {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
+    #- {os: linux, dist: trusty, sudo: required, env: 'RABBITMQ_VERSION=any'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.4'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.5'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.6'}
