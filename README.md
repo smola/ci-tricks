@@ -32,7 +32,7 @@ PostgreSQL can be set up by setting the `POSTGRESQL_VERSION` environment variabl
 
 ### RabbitMQ
 
-RabbitMQ can be set up by setting the `RABBITMQ_VERSION` environment variable to the desired PostgreSQL version.
+RabbitMQ can be set up by setting the `RABBITMQ_VERSION` environment variable to the desired RabbitMQ version.
 
 | Version       | Travis/Linux  | Travis/macOS | Appveyor/Windows      |
 | ------------- |:-------------:|:------------:|:---------------------:|
