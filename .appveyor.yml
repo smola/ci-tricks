@@ -14,7 +14,8 @@ platform:
 matrix:
   fast_finish: true
 install:
-  - ps: iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smola/ci-tricks/example/get.ps1'))
+  - pwsh /Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smola/ci-tricks/example/get.ps1'))"
+  #- ps: iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/smola/ci-tricks/example/get.ps1'))
 build: off
 test_script:
   - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%
