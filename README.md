@@ -1,4 +1,4 @@
-# ci-tricks [![Build Status](https://travis-ci.org/smola/ci-tricks.svg?branch=master)](https://travis-ci.org/smola/ci-tricks)  [![Build status](https://ci.appveyor.com/api/projects/status/github/smola/ci-tricks?branch=master&svg=true)](https://ci.appveyor.com/project/smola/ci-tricks)
+# ci-tricks [![Build Status](https://travis-ci.org/smola/ci-tricks.svg?branch=master)](https://travis-ci.org/smola/ci-tricks)  [![Build status](https://ci.appveyor.com/api/projects/status/github/smola/ci-tricks?branch=master&svg=true)](https://ci.appveyor.com/project/smola/ci-tricks) [![codecov](https://codecov.io/gh/smola/ci-tricks/branch/master/graph/badge.svg)](https://codecov.io/gh/smola/ci-tricks)
 
 **ci-tricks** is a single-binary that can be run on multiple continuous integration providers to setup the environment in an efficient way.
 

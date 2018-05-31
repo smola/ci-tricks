@@ -15,5 +15,10 @@ matrix:
 build: off
 test_script:
   - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%
-  - go test -v ./...
+  - go test -v -coverprofile=profile.out -covermode=atomic ./...
+after_test:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "profile.out" -t $env:CODECOV_TOKEN -cF windows
 deploy: off
