@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"net"
 	"os"
 	"os/exec"
@@ -90,8 +91,13 @@ func RunWithEnv(env []string, cmd string, args ...string) error {
 	ctx, cancel := GetTimeoutContext(DefaultTimeout)
 	defer cancel()
 	c := exec.CommandContext(ctx, cmd, args...)
-	c.Stderr = os.Stderr
-	c.Stdout = os.Stdout
+
+	// XXX: Workaround for https://github.com/golang/go/issues/23019
+	// Otherwise, go test will hang forever on Go 1.10.
+	// Workaround found on https://go-review.googlesource.com/c/go/+/42271/3/misc/android/go_android_exec.go#36
+	c.Stderr = struct{ io.Writer }{os.Stderr}
+	c.Stdout = struct{ io.Writer }{os.Stdout}
+
 	c.Env = env
 	return c.Run()
 }
