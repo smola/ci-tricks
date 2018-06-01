@@ -11,7 +11,7 @@ script:
   - go test -v -coverprofile=profile.out -covermode=atomic ./...
 after_success:
   - CODECOV_TAGS=$TRAVIS_OS_NAME
-  - if [[ $TRAVIS_OS_NAME = osx ]]; then CODECOV_TAGS=$CODECOV_TAGS,$TRAVIS_OSX_IMAGE ; fi
+  - if [[ $TRAVIS_OS_NAME = osx ]]; then CODECOV_TAGS=$CODECOV_TAGS,${TRAVIS_OSX_IMAGE/./} ; fi
   - if [[ ! -z $POSTGRESQL_VERSION ]]; then CODECOV_TAGS=$CODECOV_TAGS,postgresql${POSTGRESQL_VERSION/./} ; fi
   - if [[ ! -z $RABBITMQ_VERSION ]]; then CODECOV_TAGS=$CODECOV_TAGS,rabbitmq${RABBITMQ_VERSION/./} ; fi
   - bash <(curl -s https://codecov.io/bash) -f "profile.out" -cF $CODECOV_TAGS
