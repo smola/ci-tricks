@@ -23,6 +23,8 @@ jobs:
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.5'}
     - {os: linux, dist: trusty, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
     - {os: linux, dist: trusty, sudo: required, env: 'RABBITMQ_VERSION=any'}
+    - {os: linux, dist: xenial, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
+    - {os: linux, dist: xenial, sudo: required, env: 'RABBITMQ_VERSION=any'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.4'}
     - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=10'}
     - {os: osx, osx_image: xcode8.3,            env: 'RABBITMQ_VERSION=any'}

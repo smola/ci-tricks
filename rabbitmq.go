@@ -83,6 +83,20 @@ func installRabbitTravis(env *Env, version string) error {
 }
 
 func installRabbitTravisLinux(env *Env, version string) error {
+	// rabbitmq-server is installed in trusty, not in xenial
+	_, err := os.Stat("/etc/init.d/rabbitmq-server")
+	if os.IsNotExist(err) {
+		if err := Run("sudo", "apt-get", "update"); err != nil {
+			return err
+		}
+
+		if err := Run("sudo", "apt-get", "install", "-y", "erlang-nox", "rabbitmq-server"); err != nil {
+			return err
+		}
+	} else if err != nil {
+		return err
+	}
+
 	return Run("sudo", "service", "rabbitmq-server", "start")
 }
 
