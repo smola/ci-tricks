@@ -77,8 +77,10 @@ func installRabbitTravis(env *Env, version string) error {
 		return installRabbitTravisLinux(env, version)
 	case OSX:
 		return installRabbitTravisOSX(env, version)
+	case Windows:
+		return installRabbitTravisWindows(env, version)
 	default:
-		return fmt.Errorf("RabbitMQ is only supported on Linux and macOS")
+		return fmt.Errorf("RabbitMQ is only supported on Linux, macOS and Windows")
 	}
 }
 
@@ -118,4 +120,14 @@ func installRabbitTravisOSX(env *Env, version string) error {
 	}
 
 	return Run("brew", "services", "start", "rabbitmq")
+}
+
+func installRabbitTravisWindows(env *Env, version string) error {
+	if err := Run("choco", "install", "rabbitmq", "-y"); err != nil {
+		return err
+	}
+
+	time.Sleep(2 * time.Second)
+
+	return nil
 }

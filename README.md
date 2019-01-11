@@ -9,6 +9,7 @@
 * Appveyor/Windows/amd64
 * Travis/Linux/amd64 ([sudo-enabled](https://docs.travis-ci.com/user/reference/overview/#Sudo-enabled))
 * Travis/macOS/amd64
+* Travis/Windows/amd64
 
 ## Usage
 
@@ -35,22 +36,22 @@ install:
 
 PostgreSQL can be set up by setting the `POSTGRESQL_VERSION` environment variable to the desired PostgreSQL version.
 
-| Version       | Travis/Linux  | Travis/macOS | Appveyor/Windows      |
-| ------------- |:-------------:|:------------:|:---------------------:|
-| `9.2`         | ✅             | ❌           | ❌                     |
-| `9.3`         | ✅             | ❌           | ❌                     |
-| `9.4`         | ✅             | ✅           | ❌                     |
-| `9.5`         | ✅             | ✅           | ✅                     |
-| `9.6`         | ✅             | ✅           | ✅                     |
-| `10`          | ❌             | ✅           | ✅                     |
+| Version       | Travis/Linux  | Travis/macOS | Travis/Windows | Appveyor/Windows |
+| ------------- |:-------------:|:------------:|:--------------:|:----------------:|
+| `9.2`         | ✅             | ❌           | ❌              | ❌                |
+| `9.3`         | ✅             | ❌           | ❌              | ❌                |
+| `9.4`         | ✅             | ✅           | ❌              | ❌                |
+| `9.5`         | ✅             | ✅           | ❌              | ✅                |
+| `9.6`         | ✅             | ✅           | ✅              | ✅                |
+| `10`          | ❌             | ✅           | ✅              | ✅                |
 
 ### RabbitMQ
 
 RabbitMQ can be set up by setting the `RABBITMQ_VERSION` environment variable to the desired RabbitMQ version.
 
-| Version       | Travis/Linux  | Travis/macOS | Appveyor/Windows      |
-| ------------- |:-------------:|:------------:|:---------------------:|
-| `any`         | ✅             | ✅           | ✅                     |
+| Version       | Travis/Linux  | Travis/macOS | Travis/Windows | Appveyor/Windows      |
+| ------------- |:-------------:|:------------:|:--------------:|:---------------------:|
+| `any`         | ✅             | ✅           | ✅              | ✅                    |
 
 ## Contributing
 

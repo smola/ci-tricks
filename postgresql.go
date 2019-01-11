@@ -60,8 +60,10 @@ func installPostgresTravis(env *Env, version string) error {
 		return installPostgresTravisLinux(env, version)
 	case OSX:
 		return installPostgresTravisOSX(env, version)
+	case Windows:
+		return installPostgresTravisWindows(env, version)
 	default:
-		return fmt.Errorf("PostgreSQL is only supported on Linux and macOS")
+		return fmt.Errorf("PostgreSQL is only supported on Linux, macOS and Windows")
 	}
 }
 
@@ -124,6 +126,24 @@ func installPostgresTravisOSX(env *Env, version string) error {
 	}
 
 	if err := Run("psql", "--version"); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func installPostgresTravisWindows(env *Env, version string) error {
+	var pkgVersion string
+	switch version {
+	case "10":
+		pkgVersion = "10.4.0.20181106"
+	case "9.6":
+		pkgVersion = "9.6.8"
+	default:
+		return fmt.Errorf("Unsupported PostgreSQL version: %s", version)
+	}
+
+	if err := Run("choco", "install", "postgresql", "-y", "--version", pkgVersion); err != nil {
 		return err
 	}
 
