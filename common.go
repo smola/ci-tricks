@@ -89,6 +89,9 @@ func RunWithEnv(env []string, cmd string, args ...string) error {
 	fmt.Println("Run:", cmd, strings.Join(args, " "))
 	ctx, cancel := GetTimeoutContext(DefaultTimeout)
 	defer cancel()
+
+	env = append(env, "HOMEBREW_NO_AUTO_UPDATE=1")
+
 	c := exec.CommandContext(ctx, cmd, args...)
 	c.Stderr = os.Stderr
 	c.Stdout = os.Stdout

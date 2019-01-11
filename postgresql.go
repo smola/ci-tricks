@@ -91,6 +91,11 @@ func installPostgresTravisOSX(env *Env, version string) error {
 			return err
 		}
 
+		if Run("brew", "info", pkg) != nil {
+			// Ignore error, since it might fail spuriously.
+			_ = Run("brew", "update")
+		}
+
 		if err := Run("brew", "install", pkg); err != nil {
 			return err
 		}
