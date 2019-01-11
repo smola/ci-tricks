@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"net"
 	"os"
 	"os/exec"
@@ -85,18 +86,34 @@ func Run(cmd string, args ...string) error {
 	return RunWithEnv(os.Environ(), cmd, args...)
 }
 
+func Start(cmd string, args ...string) error {
+	return StartWithEnv(os.Environ(), cmd, args...)
+}
+
 func RunWithEnv(env []string, cmd string, args ...string) error {
-	fmt.Println("Run:", cmd, strings.Join(args, " "))
 	ctx, cancel := GetTimeoutContext(DefaultTimeout)
 	defer cancel()
+
+	c := createCommand(ctx, env, cmd, args...)
+	return c.Run()
+}
+
+func StartWithEnv(env []string, cmd string, args ...string) error {
+	c := createCommand(context.Background(), env, cmd, args...)
+	return c.Start()
+}
+
+func createCommand(ctx context.Context, env []string, cmd string, args ...string) *exec.Cmd {
+	fmt.Println("Run:", cmd, strings.Join(args, " "))
 
 	env = append(env, "HOMEBREW_NO_AUTO_UPDATE=1")
 
 	c := exec.CommandContext(ctx, cmd, args...)
-	c.Stderr = os.Stderr
-	c.Stdout = os.Stdout
+	// Workaround for https://github.com/golang/go/issues/24050
+	c.Stderr = struct{ io.Writer }{os.Stderr}
+	c.Stdout = struct{ io.Writer }{os.Stdout}
 	c.Env = env
-	return c.Run()
+	return c
 }
 
 func GetTimeoutContext(d time.Duration) (context.Context, context.CancelFunc) {

@@ -111,7 +111,7 @@ func installPostgresTravisOSX(env *Env, version string) error {
 		}
 	}
 
-	if err := Run("pg_ctl", "-D", "/usr/local/var/postgres", "start"); err != nil {
+	if err := Start("pg_ctl", "-D", "/usr/local/var/postgres", "start"); err != nil {
 		return err
 	}
 
