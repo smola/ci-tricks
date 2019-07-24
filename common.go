@@ -121,7 +121,7 @@ func GetTimeoutContext(d time.Duration) (context.Context, context.CancelFunc) {
 }
 
 func WaitForTCP(addr string) error {
-	for i := 0; i < 30; i++ {
+	for i := 0; i < 60; i++ {
 		conn, err := net.Dial("tcp", addr)
 		if err == nil {
 			_ = conn.Close()
