@@ -55,7 +55,7 @@ func installRabbitAppveyor(env *Env, version string) error {
 	}
 
 	path := fmt.Sprintf(
-		`C:\Program Files\erl9.2\bin;C:\ProgramData\chocolatey\bin;%s`,
+		`C:\Program Files\erl9.2\bin;C:\ProgramData\chocolatey\bin;C:\ProgramData\RabbitMQ\sbin;C:\Users\appveyor\AppData\RabbitMQ\sbin;%s`,
 		os.Getenv("PATH"))
 	environ := os.Environ()
 	environ = append(environ, fmt.Sprintf("PATH=%s", path))
@@ -66,6 +66,12 @@ func installRabbitAppveyor(env *Env, version string) error {
 		return err
 	}
 
+	if err := RunWithEnv(environ,
+		"rabbitmq-service.bat", "start",
+	); err != nil {
+		return err
+	}
+	
 	time.Sleep(2 * time.Second)
 
 	return nil
