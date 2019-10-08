@@ -113,6 +113,12 @@ func installRabbitTravisOSX(env *Env, version string) error {
 		return err
 	}
 
+	// Images with old brew recipes will try https://dl.bintray.com/rabbitmq/binaries/rabbitmq-server-generic-unix-3.6.12.tar.xz
+	// and result in a 404 error.
+	if err := Run("brew", "update"); err != nil {
+		return err
+	}
+
 	if err := Run("brew", "install", "rabbitmq"); err != nil {
 		return err
 	}
