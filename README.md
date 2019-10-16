@@ -42,7 +42,9 @@ PostgreSQL can be set up by setting the `POSTGRESQL_VERSION` environment variabl
 | `9.4`         | ✅             | ✅           | ❌                     |
 | `9.5`         | ✅             | ✅           | ✅                     |
 | `9.6`         | ✅             | ✅           | ✅                     |
-| `10`          | ❌             | ✅           | ✅                     |
+| `10`          | ✅             | ✅           | ✅                     |
+
+* '''Note:''' PostgreSQL 10 on Travis/Linux requires using xenial or higher.
 
 ### RabbitMQ
 
@@ -51,6 +53,8 @@ RabbitMQ can be set up by setting the `RABBITMQ_VERSION` environment variable to
 | Version       | Travis/Linux  | Travis/macOS | Appveyor/Windows      |
 | ------------- |:-------------:|:------------:|:---------------------:|
 | `any`         | ✅             | ✅           | ✅                     |
+
+* '''Note:''' RabbitMQ on macOS will not work on old [Travis images](https://docs.travis-ci.com/user/reference/osx/). Use `xcode9.4` or higher.
 
 ## Contributing
 
