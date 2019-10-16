@@ -1,0 +1,10 @@
+github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
+github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/lib/pq v0.0.0-20180327071824-d34b9ff171c2 h1:hRGSmZu7j271trc9sneMrpOW7GN5ngLm8YUZIPzf394=
+github.com/lib/pq v0.0.0-20180327071824-d34b9ff171c2/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/streadway/amqp v0.0.0-20181205114330-a314942b2fd9 h1:37QTz/gdHBLQcsmgMTnQDSWCtKzJ7YnfI2M2yTdr4BQ=
+github.com/streadway/amqp v0.0.0-20181205114330-a314942b2fd9/go.mod h1:1WNBiOZtZQLpVAyu0iTduoJL9hEsMloAK5XWrtW0xdY=
+github.com/stretchr/testify v0.0.0-20180319223459-c679ae2cc0cb h1:Idl4I/YpJ3WG7+/dNrHOGfnClSTk6iesxWxAjzvemdg=
+github.com/stretchr/testify v0.0.0-20180319223459-c679ae2cc0cb/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=

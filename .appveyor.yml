@@ -2,6 +2,8 @@ version: "{build}"
 clone_folder: C:\gopath\src\github.com\smola\ci-tricks
 environment:
   GOPATH: C:\gopath
+  CGO_ENABLED: "0"
+  GO111MODULE: "on"
   matrix:
     - POSTGRESQL_VERSION: 9.5
     - POSTGRESQL_VERSION: 9.6
@@ -12,6 +14,7 @@ platform:
   - x64
 matrix:
   fast_finish: true
+stack: go 1.12
 build: off
 test_script:
   - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%
