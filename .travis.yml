@@ -25,15 +25,12 @@ jobs:
     - {os: linux, dist: trusty, sudo: required, env: 'RABBITMQ_VERSION=any'}
     - {os: linux, dist: xenial, sudo: required, env: 'POSTGRESQL_VERSION=9.6'}
     - {os: linux, dist: xenial, sudo: required, env: 'RABBITMQ_VERSION=any'}
-    - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=9.4'}
-    - {os: osx, osx_image: xcode8.3,            env: 'POSTGRESQL_VERSION=10'}
-    - {os: osx, osx_image: xcode8.3,            env: 'RABBITMQ_VERSION=any'}
     - {os: osx, osx_image: xcode9.4,            env: 'POSTGRESQL_VERSION=9.4'}
     - {os: osx, osx_image: xcode9.4,            env: 'POSTGRESQL_VERSION=10'}
     - {os: osx, osx_image: xcode9.4,            env: 'RABBITMQ_VERSION=any'}
-    - {os: osx, osx_image: xcode10.1,           env: 'POSTGRESQL_VERSION=9.4'}
-    - {os: osx, osx_image: xcode10.1,           env: 'POSTGRESQL_VERSION=10'}
-    - {os: osx, osx_image: xcode10.1,           env: 'RABBITMQ_VERSION=any'}
+    - {os: osx, osx_image: xcode11.2,           env: 'POSTGRESQL_VERSION=9.4'}
+    - {os: osx, osx_image: xcode11.2,           env: 'POSTGRESQL_VERSION=10'}
+    - {os: osx, osx_image: xcode11.2,           env: 'RABBITMQ_VERSION=any'}
     - stage: deploy
       os: linux
       sudo: false
